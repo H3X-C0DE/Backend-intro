@@ -9,12 +9,21 @@ const path = require("path");
 //   }
 // );
 
-fs.writeFile(
-  path.join(__dirname, "./files", "greeting.txt"),
-  "Pissing all by your self there handsome",
+// fs.writeFile(
+//   path.join(__dirname, "./files", "greeting.txt"),
+//   "Pissing all by your self there handsome",
+//   (err) => {
+//     if (err) throw err;
+//     console.log("Writing done");
+//   }
+// );
+
+fs.appendFile(
+  path.join(__dirname, "./files", "appended/append"),
+  "This is just appended text",
   (err) => {
     if (err) throw err;
-    console.log("Writing done");
+    console.log("Appending done");
   }
 );
 
