@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fsPromises = require("fs").promises;
 const path = require("path");
 // fs.readFile(
 //   path.join(__dirname, "./files", "starter.txt"),
@@ -33,32 +33,39 @@ const path = require("path");
 //   }
 // );
 
-// const fileOps = async () => {
-//     try {
-//        const data = await fsPromises.readFile(path.join (__dirname, "starter.text"), "utf8");
-//        console.log(data)
-//     } catch (err) {
-//         console.log(err);
-//     }
-// }
-const data = await fsPromises.readFile(
-  path.join(__dirname, "starter.txt"),
-  "utf8"
-);
-console.log(data);
-await fsPromises.unlink(path.join(__dirname, "starter.txt"));
-await fsPromises.writeFile(path.join(__dirname, "promiseWrite.txt"), data);
-await fsPromises.appendFile(
-  path.join(__dirname, "promiseWrite.txt"),
-  "This has been added"
-);
-await fsPromises.rename(
-  path.join(__dirname, "promiseWrite.txt"),
-  path.join(__dirname, "newFileName.txt")
-);
+const fileOps = async () => {
+  try {
+    const data = await fsPromises.readFile(
+      path.join(__dirname, "./files/starter.txt"),
+      "utf8"
+    );
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+  const data = await fsPromises.readFile(
+    path.join(__dirname, "./files/starter.txt"),
+    "utf8"
+  );
+  console.log(data);
+  await fsPromises.unlink(path.join(__dirname, "./files/starter.txt"));
+  await fsPromises.writeFile(
+    path.join(__dirname, "./files/promiseWrite.txt"),
+    data
+  );
+  await fsPromises.appendFile(
+    path.join(__dirname, "./files/promiseWrite.txt"),
+    "This has been added"
+  );
+  await fsPromises.rename(
+    path.join(__dirname, "./files/promiseWrite.txt"),
+    path.join(__dirname, "./files/newFileName.txt")
+  );
 
-const newData = await fsPromises.readFile(
-  path.join(__dirname, "newFileName.txt"),
-  "utf8"
-);
-console.log(newData);
+  const newData = await fsPromises.readFile(
+    path.join(__dirname, "./files/newFileName.txt"),
+    "utf8"
+  );
+  console.log(newData);
+};
+fileOps();
