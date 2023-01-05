@@ -1,0 +1,27 @@
+{
+  "name": "backend-intro",
+  "version": "1.0.0",
+  "description": "lesson test",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/H3X-C0DE/Backend-intro.git"
+  },
+  "author": "vetle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/H3X-C0DE/Backend-intro/issues"
+  },
+  "homepage": "https://github.com/H3X-C0DE/Backend-intro#readme",
+  "dependencies": {
+    "date-fns": "^2.29.3",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
