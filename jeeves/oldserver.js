@@ -15,7 +15,7 @@ emitter.on("log", (msg) => logEvents(msg));
 const PORT = process.env.PORT || 3500;
 
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.meth);
+  console.log(req.url, req.meth); // method
 
   const extension = path.extname(req.url);
 
@@ -56,24 +56,24 @@ const server = http.createServer((req, res) => {
   const fileExists = fs.existsSync(filePath);
 
   if (fileExists) {
-    serveFile(filePath, contentType, res);
+    serverFile(filePath, contentType, res);
   } else {
     switch (path.parse(filePath).base) {
       case "old-page.html":
-        res.writeHead(301, { Location: "/new-page.html" });
+        res.writeHead(301, { location: "/new-page.html" });
         res.end();
         break;
       case "www-page.html":
-        res.writeHead(301, { Location: "/" });
+        res.writeHead(301, { location: "/" });
         res.end();
         break;
       default:
-        serveFile(path.join(__dirname, "view", "404.html"), "text/html", res);
+        serverFile(path.join(__dirname, "view", "404.html"), "text/html", res);
     }
   }
 });
 
-const serveFile = async (filePath, contentType, response) => {
+const serverFile = async (filePath, contentType, response) => {
   try {
     const rawData = await fsPromises.readFile(
       filePath,
@@ -84,9 +84,8 @@ const serveFile = async (filePath, contentType, response) => {
     response.writeHead(filePath.includes("404.html") ? 404 : 200, {
       "Content-Type": contentType,
     });
-    response.end(
-      contentType === "application/json" ? JSON.stringify(data) : data
-    );
+    response.end;
+    contentType === "application/json" ? JSON.stringify(data) : data;
   } catch (err) {
     console.log(err);
     TheEmitter.emit("log", `${err.name}: ${err.message}`, "errLog.txt");
