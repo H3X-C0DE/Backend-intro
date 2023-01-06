@@ -2,10 +2,10 @@
   "name": "backend-intro",
   "version": "1.0.0",
   "description": "lesson test",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
