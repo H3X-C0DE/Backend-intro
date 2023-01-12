@@ -34,18 +34,9 @@ app.use(errorHandler);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "/public")));
-
-app.get("^/$|/index(.html)?", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "index.html"));
-});
-
-app.get("/new-page.html", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "new-page.html"));
-});
-
-app.get("/old-page(.html)?", (req, res) => {
-  res.redirect(301, "/new-page.html");
-});
+app.use("/subdir", require("./routes/subdir"));
+app.use("/", require("./routes/root"));
+app.use("/employees", require("./routes/api/eployees"));
 
 app.get("/*", (req, res) => {
   res.status(404);
@@ -53,8 +44,7 @@ app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "view", "404.html"));
   } else if (req.accepts("json")) {
     res.json({ error: "404, Json not found" });
-  } else req.accepts("txt");
-  {
+  } else if (req.accepts("txt")) {
     res.type({ error: "404, text not found" });
   }
 });
