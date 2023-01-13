@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/H3X-C0DE/Backend-intro#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "date-fns": "^2.29.3",
     "uuid": "^9.0.0"
   },
