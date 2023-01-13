@@ -5,38 +5,27 @@ const { logger } = require("./middleware/logEvents");
 const cors = require("cors");
 const app = express();
 const errorHandler = require("./middleware/errorHandler");
-
+const corsOptions = require("../jeeves/config/corsOptions");
 const { text } = require("express");
-// port definition
+
+// Port definition
 const PORT = process.env.PORT || 3500;
 
-// middleware
+// Middleware
 app.use(logger);
 app.use(cors());
-
-//CORS Lists
-const whitelist = ["http://localhost:3500", "http://127.0.0.1:5500"];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Blocked by Big Daddy CORS!"));
-    }
-  },
-  optionSuccessStatus: 200,
-};
+//corsOptions
 app.use(cors(corsOptions));
 
 app.use(errorHandler);
-
-// Routes
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Routes
 app.use(express.static(path.join(__dirname, "/public")));
-app.use("/subdir", require("./routes/subdir"));
 app.use("/", require("./routes/root"));
-app.use("/employees", require("./routes/api/eployees"));
+app.use("/employees", require("./routes/api/employees"));
+app.use("/register", require("./routes/register"));
 
 app.get("/*", (req, res) => {
   res.status(404);
