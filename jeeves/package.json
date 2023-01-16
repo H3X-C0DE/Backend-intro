@@ -1,25 +1,19 @@
 {
-  "name": "backend-intro",
+  "name": "jeeves",
   "version": "1.0.0",
-  "description": "lesson test",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/H3X-C0DE/Backend-intro.git"
-  },
-  "author": "vetle",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/H3X-C0DE/Backend-intro/issues"
-  },
-  "homepage": "https://github.com/H3X-C0DE/Backend-intro#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "date-fns": "^2.29.3",
+    "express": "^4.18.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
