@@ -11,13 +11,14 @@ const handleLogin = async (req, res) => {
   const { user, pwd } = req.body;
   if (!user || !pwd)
     return res.status(400).json({ message: "Username and password required" });
-
-  const foundUser = usersDB.users.find((person) => person.username === user);
+  // console.log(usersDB.users);
+  // console.log(user);
+  const foundUser = usersDB.users.find((person) => person.userName === user);
 
   if (!foundUser) {
     console.log("username failed");
-    console.log(user);
-    console.log(foundUser);
+    // console.log(user);
+    // console.log(foundUser);
     return res.sendStatus(401);
   }
 
