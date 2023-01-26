@@ -1,14 +1,6 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const fsPromises = require("fs").promises;
-const path = require("path");
+const User = require("../model/User");
 
 require("dotenv").config();
 
@@ -16,11 +8,7 @@ const handleLogin = async (req, res) => {
   const { user, pwd } = req.body;
   if (!user || !pwd)
     return res.status(400).json({ message: "Username and password required" });
-  console.log(usersDB.users);
-  //   console.log(user);
-  const foundUser = usersDB.users.find((person) => person.username === user);
-  //   console.log(foundUser);
-  //   console.log(user);
+  const foundUser = await User.findOne({ username: user }).exec();
 
   if (!foundUser) return res.sendStatus(401);
 
@@ -44,15 +32,11 @@ const handleLogin = async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "1d" }
     );
-    const otherUsers = usersDB.users.filter(
-      (person) => person.username !== foundUser.username
-    );
-    const currentUser = { ...foundUser, refreshToken };
-    usersDB.setUsers([...otherUsers, currentUser]);
-    await fsPromises.writeFile(
-      path.join(__dirname, "..", "model", "users.json"),
-      JSON.stringify(usersDB.users)
-    );
+
+    foundUser.refreshToken = refreshToken;
+    const result = await foundUser.save();
+    console.log(result);
+
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
