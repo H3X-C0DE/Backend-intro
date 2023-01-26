@@ -20,6 +20,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "date-fns": "^2.29.3",
+    "mongoose": "^6.8.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

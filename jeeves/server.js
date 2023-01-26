@@ -9,6 +9,11 @@ const corsOptions = require("../jeeves/config/corsOptions");
 const { text } = require("express");
 const verifyJWT = require("./middleware/verifyJWT");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
+const mongoose = require("mongoose");
+const connectDB = require("./config/dbConn");
+
+connectDB();
 
 // Port definition
 const PORT = process.env.PORT || 3500;
@@ -48,5 +53,8 @@ app.get("/*", (req, res) => {
   }
 });
 
-//Listener
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// The Listener
+mongoose.connection.once("open", () => {
+  console.log("Connection to MongoDB");
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
